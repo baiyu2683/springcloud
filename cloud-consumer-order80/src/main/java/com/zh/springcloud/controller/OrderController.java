@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 public class OrderController {
 
     public static final String PAYMENT_URL = "http://localhost:8001";
+
     @Autowired
     private RestTemplate restTemplate;
 
