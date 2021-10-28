@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8002
 
 spring:
   application:
@@ -18,8 +18,8 @@ mybatis:
 
 eureka:
   instance:
-    instance-id: payment8001
-    prefer-ip-address: true
+    instance-id: payment8002
+    prefer-ip-address: true # 访问路径显示ip
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 5
   client:

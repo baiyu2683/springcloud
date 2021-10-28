@@ -5,7 +5,13 @@ import com.zh.springcloud.entities.Payment;
 import com.zh.springcloud.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.ws.Service;
+import java.util.List;
 
 @RestController
 @RequestMapping("/payment")
@@ -27,7 +33,28 @@ public class PaymentController {
 
     @GetMapping("/get/{id}")
     public CommonResult<Payment> get(@PathVariable("id") Long id) {
+        log.info("调用服务: 8001");
         Payment payment = paymentService.getPaymentById(id);
         return new CommonResult<Payment>(200, "查询成功", payment);
     }
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    @Value("${spring.application.name}")
+    private String paymentInstanceName;
+
+    @GetMapping("/discory")
+    public Object discovery() {
+        List<String> services = discoveryClient.getServices();
+        for (String service : services) {
+            log.info("service: " + service);
+        }
+        List<ServiceInstance> instances = discoveryClient.getInstances(paymentInstanceName);
+        for (ServiceInstance serviceInstance : instances) {
+            log.info("instance: " + serviceInstance.getInstanceId() + "\n" + serviceInstance.getServiceId() + "\n" + serviceInstance.getHost() + "\n" + serviceInstance.getPort() + "\n" + serviceInstance.getUri());
+        }
+        return discoveryClient;
+    }
+
 }
