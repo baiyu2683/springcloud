@@ -29,6 +29,11 @@ public class PaymentController {
     public CommonResult<Payment> get(@PathVariable("id") Long id) {
         log.info("调用服务: 8002");
         Payment payment = paymentService.getPaymentById(id);
-        return new CommonResult<Payment>(200, "查询成功", payment);
+        return new CommonResult<Payment>(200, "8002查询成功", payment);
+    }
+
+    @GetMapping("/lb")
+    public String lb() {
+        return "8002 lb";
     }
 }

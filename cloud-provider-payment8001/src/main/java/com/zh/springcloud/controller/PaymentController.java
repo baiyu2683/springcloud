@@ -35,7 +35,7 @@ public class PaymentController {
     public CommonResult<Payment> get(@PathVariable("id") Long id) {
         log.info("调用服务: 8001");
         Payment payment = paymentService.getPaymentById(id);
-        return new CommonResult<Payment>(200, "查询成功", payment);
+        return new CommonResult<Payment>(200, "8001查询成功", payment);
     }
 
     @Autowired
@@ -57,4 +57,8 @@ public class PaymentController {
         return discoveryClient;
     }
 
+    @GetMapping("/lb")
+    public String lb() {
+        return "8001 lb";
+    }
 }
