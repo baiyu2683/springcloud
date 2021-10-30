@@ -1,0 +1,22 @@
+server:
+  port: 80
+
+eureka:
+  instance:
+    instance-id: orderOpenFeign80
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka
+
+# Ribbon超时时间
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 3000
+
+logging:
+  level:
+    # 设置OpenFeign的服务类日志打印级别
+    com.zh.springcloud.service.*: DEBUG

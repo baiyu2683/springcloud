@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.zh.springcloud.service.PaymentService;
 
+import java.util.concurrent.TimeUnit;
+
 @RestController
 @RequestMapping("/payment")
 @Slf4j
@@ -35,5 +37,15 @@ public class PaymentController {
     @GetMapping("/lb")
     public String lb() {
         return "8002 lb";
+    }
+
+    @GetMapping("/feign/timeout")
+    public String paymentTimeout() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "8002 timeout";
     }
 }
