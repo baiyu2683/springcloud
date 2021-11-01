@@ -1,0 +1,36 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:  # 配置payment服务的路由
+        - id: payment_route1
+#          uri: http://localhost:8001
+          uri: lb://cloud-payment-service
+          predicates:
+            - Path=/payment/get/**
+        - id: payment_route3
+          uri: lb://cloud-payment-service
+          predicates:
+            - Path=/payment/lb/**
+            - After=2021-11-01T16:34:47.990+08:00[Asia/Shanghai]   # 在某个时间之后
+        - id: baidu_route4
+          uri: http://news.baidu.com
+          predicates:
+            - Cookie=chocolate, ch.p
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    hostname: cloud-gateway-service
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka
