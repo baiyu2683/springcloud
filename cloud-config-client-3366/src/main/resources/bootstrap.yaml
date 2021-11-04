@@ -1,5 +1,5 @@
 server:
-  port: 3355
+  port: 3366
 
 spring:
   application:
@@ -22,10 +22,9 @@ eureka:
   client:
     service-url: http://localhost:7001/eureka,http://localhost:7002/eureka
 
-## 暴露监控端点，actuator的监控,默认http不开启
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
-
+# 暴露监控端点，actuator的监控,默认http不开启
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
