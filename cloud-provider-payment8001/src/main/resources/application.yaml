@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8801
 
 spring:
   application:
@@ -10,7 +10,11 @@ spring:
     url: jdbc:mysql://localhost:3306/sc
     username: root
     password: root
-
+  zipkin:
+    base-url: http://localhost:9441
+  sleuth:
+    sampler:
+      probability: 1  # 采样率，介于0-1之间，1标识全部采集
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

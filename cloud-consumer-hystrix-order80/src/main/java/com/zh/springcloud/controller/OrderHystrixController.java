@@ -52,4 +52,9 @@ public class OrderHystrixController {
         log.error("错误", throwable);
         return "全局异常处理。。。";
     }
+
+    @GetMapping("/payment/zipkin")
+    public String paymentZipkin() {
+        return paymentHystrixService.paymentZipkin();
+    }
 }

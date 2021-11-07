@@ -4,6 +4,7 @@ import com.zh.springcloud.entities.CommonResult;
 import com.zh.springcloud.entities.Payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import com.zh.springcloud.service.PaymentService;
 
@@ -47,5 +48,13 @@ public class PaymentController {
             e.printStackTrace();
         }
         return "8002 timeout";
+    }
+
+    @Value("${server.port}")
+    private Integer serverPort;
+
+    @GetMapping("/zipkin")
+    public String paymentZipkin() {
+        return "i am paymentzipkin server fall back, welcome, port: " + serverPort;
     }
 }

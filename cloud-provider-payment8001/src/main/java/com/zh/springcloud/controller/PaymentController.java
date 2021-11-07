@@ -72,4 +72,12 @@ public class PaymentController {
         }
         return "8001 timeout";
     }
+
+    @Value("${server.port}")
+    private Integer serverPort;
+
+    @GetMapping("/zipkin")
+    public String paymentZipkin() {
+        return "i am paymentzipkin server fall back, welcome, port: " + serverPort;
+    }
 }

@@ -16,4 +16,9 @@ public class PaymentFallbackService implements PaymentHystrixService {
     public String timeout(Integer id) {
         return "paymentFallbackService timeout";
     }
+
+    @Override
+    public String paymentZipkin() {
+        return "paymentFallback Zipkin";
+    }
 }
